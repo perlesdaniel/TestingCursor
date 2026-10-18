@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The best pictures from Lionel Messi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #071428;
+      --blue: #0b3d91;
+      --gold: #c9a227;
+      --paper: #f4efe4;
+      --ink: #1a1a1a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", sans-serif;
+      background: var(--navy);
+      color: var(--paper);
+    }
+
+    header.hero {
+      text-align: center;
+      padding: 3.2rem 1.25rem 2.4rem;
+      background:
+        linear-gradient(180deg, rgba(7, 20, 40, 0.35), rgba(7, 20, 40, 0.92)),
+        url("https://upload.wikimedia.org/wikipedia/commons/d/d7/Suisse_vs_Argentine_-_Granit_Xhaka_%26_Lionel_Messi.jpg") center 20% / cover no-repeat;
+    }
+
+    header.hero h1 {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 5.5vw, 3.6rem);
+      letter-spacing: 0.01em;
+      text-transform: none;
+    }
+
+    header.hero p {
+      margin: 0.6rem auto 0;
+      max-width: 42rem;
+      color: #d8d3c6;
+    }
+
+    .weather {
+      margin-top: 1.4rem;
+      display: inline-flex;
+      gap: 0.75rem;
+      align-items: center;
+      background: rgba(12, 28, 58, 0.78);
+      border: 1px solid rgba(201, 162, 39, 0.45);
+      border-radius: 999px;
+      padding: 0.55rem 1.1rem;
+      font-weight: 600;
+    }
+
+    .weather .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    figure {
+      margin: 0;
+      background: #0d1c36;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    figure img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      background: #123;
+    }
+
+    figcaption {
+      padding: 0.9rem 1rem 1.05rem;
+      font-size: 0.92rem;
+      line-height: 1.4;
+      color: #ddd6c6;
+    }
+
+    figcaption strong {
+      display: block;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    figcaption a {
+      color: var(--gold);
+    }
+
+    .tools {
+      margin-top: 3rem;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
+      justify-content: center;
+    }
+
+    .temp-value {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin: 0.2rem 0 0.4rem;
+    }
+
+    .temp-note {
+      color: #c9c3b4;
+      margin: 0;
+    }
+
+    .panel {
+      width: min(360px, 100%);
+      background: #10203f;
+      border: 1px solid rgba(201, 162, 39, 0.35);
+      border-radius: 16px;
+      padding: 1.25rem;
+    }
+
+    .panel h2 {
+      margin: 0 0 0.9rem;
+      font-family: "Playfair Display", serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.02em;
+      color: var(--gold);
+    }
+
+    .calc-display {
+      width: 100%;
+      background: #071226;
+      color: #fff;
+      border: 0;
+      border-radius: 8px;
+      padding: 0.85rem;
+      font-size: 1.6rem;
+      text-align: right;
+      margin-bottom: 0.75rem;
+    }
+
+    .keys {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+
+    .keys button {
+      font: inherit;
+      font-weight: 700;
+      border: 0;
+      border-radius: 8px;
+      padding: 0.85rem 0;
+      cursor: pointer;
+      background: #1c335f;
+      color: #fff;
+    }
+
+    .keys button.op { background: var(--blue); }
+    .keys button.eq { background: var(--gold); color: #1a1404; }
+    .keys button.clear { background: #8b1e1e; }
+    .keys button:hover { filter: brightness(1.12); }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #9aa3b5;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <h1>the best pictures from Lionel Messi</h1>
+    <p>Ten freely licensed photos of Lionel Messi playing soccer, from Wikimedia Commons.</p>
+    <div class="weather" id="weather">
+      <span class="dot"></span>
+      <span id="weather-text">Loading New York temperature…</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="gallery" aria-label="Lionel Messi photo gallery">
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Lionel-Messi-Argentina-2022-FIFA-World-Cup.jpg" alt="Lionel Messi playing for Argentina at the 2022 FIFA World Cup" />
+        <figcaption>
+          <strong>Argentina, 2022 World Cup</strong>
+          vs Mexico. Photo: Hossein Zohrevand / Tasnim News Agency.
+          <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Lionel_Messi_in_2018.jpg" alt="Lionel Messi celebrating a goal against Nigeria at the 2018 World Cup" />
+        <figcaption>
+          <strong>Argentina vs Nigeria, 2018</strong>
+          World Cup group-stage celebration. Photo: Кирилл Венедиктов.
+          <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/FWC_2018_-_Group_D_-_ARG_v_ISL_-_Messi_penalty_kick.jpg" alt="Lionel Messi taking a penalty kick against Iceland at the 2018 World Cup" />
+        <figcaption>
+          <strong>Penalty vs Iceland, 2018</strong>
+          World Cup group stage. Photo: Voltmetro.
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Suisse_vs_Argentine_-_Granit_Xhaka_%26_Lionel_Messi.jpg" alt="Lionel Messi controlling the ball against Granit Xhaka of Switzerland" />
+        <figcaption>
+          <strong>Argentina vs Switzerland, 2012</strong>
+          Messi on the ball. Photo: Ludovic Péron.
+          <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Lionel_Messi_NE_Revolution_Inter_Miami_7.9.25-021.jpg" alt="Lionel Messi playing for Inter Miami against New England Revolution" />
+        <figcaption>
+          <strong>Inter Miami, 2025</strong>
+          vs New England Revolution. Photo: Bryan Berlin.
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Lionel_Messi_Player_of_the_Year_2011.jpg" alt="Lionel Messi shooting for FC Barcelona at the 2011 FIFA Club World Cup" />
+        <figcaption>
+          <strong>Barcelona, Club World Cup 2011</strong>
+          Shooting in match action. Photo: Christopher Johnson.
+          <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Lionel_Messi_vs_Osasuna.jpg" alt="Lionel Messi of Barcelona playing against Osasuna" />
+        <figcaption>
+          <strong>Barcelona vs Osasuna, 2011</strong>
+          La Liga match action. Photo: Jeroen Bennink.
+          <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Messi_vs_Villarreal_2009.jpg" alt="Lionel Messi of Barcelona playing against Villarreal" />
+        <figcaption>
+          <strong>Barcelona vs Villarreal, 2009</strong>
+          Match action with Dani Alves nearby. Photo: Aitor Escauriaza.
+          <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Lionel_Messi_goal_19abr2007.jpg" alt="Lionel Messi seconds before scoring against Getafe" />
+        <figcaption>
+          <strong>Goal vs Getafe, 2007</strong>
+          Seconds before scoring. Photo: Darz Mol.
+          <a href="https://creativecommons.org/licenses/by-sa/2.5/es/deed.en">CC BY-SA 2.5 ES</a>
+        </figcaption>
+      </figure>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Leo_messi_barce_2005.jpg" alt="Lionel Messi playing for Barcelona against Malaga in 2005" />
+        <figcaption>
+          <strong>Barcelona vs Málaga, 2005</strong>
+          Early Barcelona years. Photo: Josep Tomàs.
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="tools">
+      <div class="panel">
+        <h2>New York temperature</h2>
+        <p class="temp-value" id="temp-value">Loading…</p>
+        <p class="temp-note">Live reading for New York City from Open-Meteo.</p>
+      </div>
+      <div class="panel">
+        <h2>Calculator</h2>
+        <input class="calc-display" id="display" value="0" readonly aria-label="Calculator display" />
+        <div class="keys">
+          <button class="clear" data-action="clear">C</button>
+          <button class="op" data-action="sign">±</button>
+          <button class="op" data-action="percent">%</button>
+          <button class="op" data-op="/">÷</button>
+          <button data-digit="7">7</button>
+          <button data-digit="8">8</button>
+          <button data-digit="9">9</button>
+          <button class="op" data-op="*">×</button>
+          <button data-digit="4">4</button>
+          <button data-digit="5">5</button>
+          <button data-digit="6">6</button>
+          <button class="op" data-op="-">−</button>
+          <button data-digit="1">1</button>
+          <button data-digit="2">2</button>
+          <button data-digit="3">3</button>
+          <button class="op" data-op="+">+</button>
+          <button data-digit="0">0</button>
+          <button data-digit=".">.</button>
+          <button class="eq" data-action="equals" style="grid-column: span 2;">=</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Photos are from Wikimedia Commons under Creative Commons licenses. Weather data from Open-Meteo.
+  </footer>
+
+  <script>
+    const weatherText = document.getElementById("weather-text");
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=40.7128&longitude=-74.0060&current=temperature_2m&temperature_unit=fahrenheit&timezone=America%2FNew_York")
+      .then((res) => res.json())
+      .then((data) => {
+        const f = data.current.temperature_2m;
+        const c = ((f - 32) * 5) / 9;
+        const label = `New York temperature: ${Math.round(f)}°F (${c.toFixed(1)}°C)`;
+        weatherText.textContent = label;
+        document.getElementById("temp-value").textContent = `${Math.round(f)}°F / ${c.toFixed(1)}°C`;
+      })
+      .catch(() => {
+        weatherText.textContent = "New York temperature could not be loaded.";
+        document.getElementById("temp-value").textContent = "Unavailable";
+      });
+
+    const display = document.getElementById("display");
+    let current = "0";
+    let stored = null;
+    let pending = null;
+    let fresh = false;
+
+    function show(value) {
+      current = String(value);
+      display.value = current;
+    }
+
+    function compute(a, op, b) {
+      const x = Number(a);
+      const y = Number(b);
+      if (op === "+") return x + y;
+      if (op === "-") return x - y;
+      if (op === "*") return x * y;
+      if (op === "/") return y === 0 ? "Error" : x / y;
+      return y;
+    }
+
+    document.querySelector(".keys").addEventListener("click", (event) => {
+      const btn = event.target.closest("button");
+      if (!btn) return;
+
+      if (btn.dataset.digit !== undefined) {
+        const digit = btn.dataset.digit;
+        if (fresh || current === "0" || current === "Error") {
+          current = digit === "." ? "0." : digit;
+          fresh = false;
+        } else if (!(digit === "." && current.includes("."))) {
+          current += digit;
+        }
+        display.value = current;
+        return;
+      }
+
+      if (btn.dataset.op) {
+        if (stored !== null && pending && !fresh) {
+          const result = compute(stored, pending, current);
+          show(result);
+          stored = result === "Error" ? null : result;
+        } else {
+          stored = current;
+        }
+        pending = btn.dataset.op;
+        fresh = true;
+        return;
+      }
+
+      const action = btn.dataset.action;
+      if (action === "clear") {
+        stored = null;
+        pending = null;
+        fresh = false;
+        show("0");
+      } else if (action === "sign") {
+        if (current !== "0" && current !== "Error") show(String(Number(current) * -1));
+      } else if (action === "percent") {
+        show(String(Number(current) / 100));
+      } else if (action === "equals" && pending && stored !== null) {
+        const result = compute(stored, pending, current);
+        show(result);
+        stored = null;
+        pending = null;
+        fresh = true;
+      }
+    });
+  </script>
+</body>
+</html>
